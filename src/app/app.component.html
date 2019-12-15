@@ -1,0 +1,20 @@
+<div class="container">
+  <app-cockpit (serverCreated)="onServerAdded($event)" (bpCreated)="onBluePrintAdded($event)"
+  ></app-cockpit>
+  <hr>
+  <div class="row">
+    <div class="col-xs-12">
+      <button class="btn btn-primary" (click)="changeFirstElement();" style="margin-bottom:10px;">Change First Element</button>
+      <!-- Below is to show how ngOnDestroy Works -->
+      <button class="btn btn-danger" (click)="destroyFirstElement();" style="margin-left:10px;margin-bottom:10px;">Destroy First Element</button>
+
+      <app-server-element  *ngFor="let serverElement of serverElements;" [serverElement]="serverElement" [name]="serverElement.name" >
+        <!-- This bottom one is used for ng-content directive -->
+          <p #paragraph>
+          <strong *ngIf="serverElement.type === 'server'" style="color: red">{{ serverElement.content }}</strong>
+          <em *ngIf="serverElement.type === 'blueprint'">{{ serverElement.content }}</em>
+        </p> 
+      </app-server-element>
+    </div>
+  </div>
+</div>
